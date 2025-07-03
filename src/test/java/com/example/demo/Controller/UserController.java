@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+@RestController
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
@@ -43,14 +45,12 @@ public class UserController {
         }).orElse(ResponseEntity.notFound().build());
     }
     @DeleteMapping
-    public ResponseEntity<Void> deleteUser(@PathVariable Long id){
-        if(userRepository.existsById(id)){
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        if (userRepository.existsById(id)) {
             userRepository.deleteById(id);
             return ResponseEntity.noContent().build();
-        }
-        else{
+        } else {
             return ResponseEntity.notFound().build();
         }
-
     }
 }
