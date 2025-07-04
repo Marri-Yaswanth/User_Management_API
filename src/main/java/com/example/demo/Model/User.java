@@ -13,15 +13,16 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "users")
 public class User {
-    //New: Creation Timestamp
-    @Column(name="created at",updatable = false)//updatable = false ensures it's set only once
+
+    @Column(name="created at", updatable = false)
     @CreationTimestamp
     private LocalDate createdAt;
-    //new: Updated timestamp
+
     @Column(name ="updated At")
     @UpdateTimestamp
     private LocalDateTime updatedAt;
-    @Id //specifies the primary key of the entity
+
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -32,6 +33,15 @@ public class User {
     @NotBlank(message = "Email is required")
     @Email(message = "Email should be valid")
     private String email;
+
+    // ✅ Required by JPA
+    public User() {
+    }
+
+    public User(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
 
     public LocalDate getCreatedAt() {
         return createdAt;
@@ -47,10 +57,6 @@ public class User {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public User(){
-
     }
 
     public Long getId() {
@@ -85,5 +91,4 @@ public class User {
                 ", email='" + email + '\'' +
                 '}';
     }
-
 }
