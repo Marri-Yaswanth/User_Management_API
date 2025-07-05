@@ -45,7 +45,12 @@ public class UserRepositoryTest {
         assertThat(foundUser.get().getId()).isEqualTo(user1.getId());
     }
 
-//    void testFindByEmailNotFound() throws Exception {
-//
-//    }
+    @Test
+    void testFindByEmailNotFound() throws Exception {
+        Optional<User> notFound = userRepository.findByEmail("notemail@example.com");
+        assertThat(notFound).isNotPresent();
+//        assertThat(notFound.get().getName()).isNotEqualTo(user1.getName());
+//        assertThat(notFound.get().getEmail()).isNotEqualTo(user1.getEmail());
+//        assertThat(notFound.get().getId()).isNotEqualTo(user1.getId());
+    }
 }
