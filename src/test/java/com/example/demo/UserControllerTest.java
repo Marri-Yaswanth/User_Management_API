@@ -21,8 +21,7 @@ import java.util.stream.IntStream;
 import static org.hamcrest.Matchers.is;
 
 import static org.hamcrest.Matchers.notNullValue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -87,5 +86,18 @@ public class UserControllerTest {
                 .andExpect(jsonPath("$[1].id",notNullValue()))
                 .andExpect(jsonPath("$[1].name",is("John Doe")))
                 .andExpect(jsonPath("$[1].email",is("john.doe@example.com")));
+    }
+    @Test
+    void testDeleteUserFound() throws Exception {
+        mockMvc.perform(delete("/api/users/{id}" + user1.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+    }
+    @Test
+    void testDeleteUserNotFound() throws Exception {
+        Long nonExistentId = 99999L;
+        mockMvc.perform(delete("/api/users/{id}" + nonExistentId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 }
