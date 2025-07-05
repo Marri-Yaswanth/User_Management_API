@@ -49,8 +49,32 @@ public class UserRepositoryTest {
     void testFindByEmailNotFound() throws Exception {
         Optional<User> notFound = userRepository.findByEmail("notemail@example.com");
         assertThat(notFound).isNotPresent();
-//        assertThat(notFound.get().getName()).isNotEqualTo(user1.getName());
-//        assertThat(notFound.get().getEmail()).isNotEqualTo(user1.getEmail());
-//        assertThat(notFound.get().getId()).isNotEqualTo(user1.getId());
+    }
+
+    @Test
+    void testSaveUSer(){
+        User newUser = new User("Charlie Chaplin" ,"charlie@example.com");
+        User savedUser = userRepository.save(newUser);
+
+        assertThat(savedUser).isNotNull();
+        assertThat(savedUser.getId()).isNotNull();
+        assertThat(savedUser.getName()).isEqualTo("Charlie Chaplin");
+    }
+
+    @Test
+    void testUpdateUser(){
+        String newName = "Yaswanth";
+        String newEmail = "yaswanth@example.com";
+
+        User user3 = new User("Siva", "siva@example.com");
+
+        user3.setName(newName);
+        user3.setEmail(newEmail);
+
+        User updatedUser = userRepository.save(user3);
+        assertThat(updatedUser).isNotNull();
+        assertThat(updatedUser.getName()).isNotNull();
+        assertThat(updatedUser.getEmail()).isNotNull();
+        assertThat(updatedUser.getId()).isNotNull();
     }
 }
