@@ -77,4 +77,6 @@ public class UserRepositoryTest {
         assertThat(updatedUser.getEmail()).isNotNull();
         assertThat(updatedUser.getId()).isNotNull();
     }
+
+     
 }

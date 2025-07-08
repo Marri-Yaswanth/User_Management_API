@@ -100,4 +100,36 @@ public class UserControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
     }
+
+//    @Test
+//    void createUser() {
+//    }
+//
+//    @Test
+//    void getAllUsers() {
+//    }
+//
+//    @Test
+//    void getUserById() {
+//    }
+//
+//    @Test
+//    void updateUser() {
+//    }
+//
+//    @Test
+//    void deleteUser() {
+//    }
+//
+//    @Test
+//    void getUsers() {
+//    }
+//
+//    @Test
+//    void registerUser() {
+//    }
+//
+//    @Test
+//    void testGetAllUsers() {
+//    }
 }
